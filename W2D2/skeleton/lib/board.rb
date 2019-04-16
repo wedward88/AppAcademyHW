@@ -29,34 +29,41 @@ class Board
   end
 
   def make_move(start_pos, current_player_name)
-    cups[start_pos] = []
-    i = (start_pos + 1) % 13
-    while i <= (start_pos + 4)
+    stones_in_hand = []
+    cups[start_pos].count.times {stones_in_hand << cups[start_pos].shift}
+    i = start_pos % 14
+    until stones_in_hand.empty?
+      i =  (i + 1) % 14
       case current_player_name == @player1
       when true
-        cups[i] << :stone if (0..12).include?(i)
+        cups[i] << stones_in_hand.shift if (0..12).include?(i)
       when false
-        cups[i] << :stone if (0..5).include?(i) || (7..13).include?(i)
+        cups[i] << stones_in_hand.shift if (0..5).include?(i) || (7..13).include?(i)
       end
-      i += 1
     end
     render
     # debugger
-    next_turn(i, current_player_name)
+    return next_turn(i, current_player_name)
   end
 
   def next_turn(ending_cup_idx, current_player_name)
     # helper method to determine whether #make_move returns :switch, :prompt, or ending_cup_idx
-    case ending_cup_idx
-      when 6 && current_player_name == @player1
-        return :prompt
-      when 13 && current_player_name == @player2
-        return :prompt
-      end
+    # debugger
     
-    return :switch if cups[ending_cup_idx].empty? && (ending_cup_idx != 6 || ending_cup_idx != 13)  
-    return ending_cup_idx if !cups[ending_cup_idx].empty? && (ending_cup_idx != 6 || ending_cup_idx != 13)
-  
+    own_point_cup = 6 if current_player_name == @player1
+    own_point_cup = 13 if current_player_name == @player2
+    own_cups = []
+    own_cups += (0..12).to_a if current_player_name == @player1
+    own_cups += (0..5).to_a + (7..13).to_a if current_player_name == @player2
+    
+    if cups[ending_cup_idx].count == 1 && own_point_cup == ending_cup_idx
+        return :prompt
+    elsif cups[ending_cup_idx].count == 1
+        return :switch
+    else
+        return ending_cup_idx
+    end
+
   end
 
   def render
@@ -68,8 +75,17 @@ class Board
   end
 
   def one_side_empty?
+    return true if cups[0..5].all? {|cup| cup.empty?} || cups[7..12].all? {|cup| cup.empty?}
+    false
   end
 
   def winner
+    if cups[6].count > cups[13].count
+      return @player1
+    elsif cups[6].count < cups[13].count
+      return @player2
+    else
+      return :draw
+    end
   end
 end
