@@ -24,16 +24,22 @@ describe Dessert do
     end
 
     it "raises an argument error when given a non-integer quantity" do
-      expect(Dessert.new("brownie", "larry bird", "Gary Busey")).to raise_error(ArgumentError)
+      expect{Dessert.new("brownie", "larry bird", "Gary Busey")}.to raise_error(ArgumentError)
     end
   end
 
   describe "#add_ingredient" do
-    it "adds an ingredient to the ingredients array"
+    it "adds an ingredient to the ingredients array" do
+      expect(brownie.ingredients).to eq([])
+          brownie.ingredients << "sugar"
+      expect(brownie.ingredients).to eq(["sugar"])
+    end
   end
 
   describe "#mix!" do
-    it "shuffles the ingredient array"
+    it "shuffles the ingredient array" do
+      expect(brownie.mix!).to receive(:shuffle!)
+    end
   end
 
   describe "#eat" do
