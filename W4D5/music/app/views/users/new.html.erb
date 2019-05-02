@@ -1,0 +1,13 @@
+
+<label for="registration_form"><h3>Please register below:</h3></label>
+<form action="<%= users_url %>" method="POST" id="registration_form">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+    <label for="user_email">Email Address</label>
+    <input type="text" id="user_email" name="user[email]">
+    <br>
+    <label for="user_password">Password</label>
+    <input type="password" id="user_password" name="user[password]">
+    <br>
+    <input type="submit" value="Register">
+</form>

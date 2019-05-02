@@ -1,0 +1,40 @@
+h1 {
+    font-family: 'Lobster', cursive;
+}
+
+html {
+    display: flex;
+    
+}
+
+body {
+    width: 50%;
+    margin: 0 auto;
+}
+form {
+    text-align: center;
+    background-color: beige;
+}
+
+form * {
+    padding: 3px;
+}
+
+form a {
+    border: 2px;
+    background-color: bisque;
+    text-decoration: none;
+    color: black;
+}
+
+#nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#nav_links a {
+    display: flex;
+}
+
+

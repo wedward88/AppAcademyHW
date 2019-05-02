@@ -1,0 +1,12 @@
+<%if Band.all.empty?%>
+    <h2> You don't have any favorite bands!? Who are you. Re-evaluate your life.</h2>
+<%else%>
+    <h2>Here is a list of your favorite bands:</h2>
+<%end%>
+<% Band.all.each do |band|%>
+    <ul>
+        <li><a href="<%= band_url(band) %>"><%=band.name%></a></li>
+    </ul>
+<%end%>
+
+<h2>Click <a href="<%= new_band_url %>">here</a> to add a new band.</h2>
