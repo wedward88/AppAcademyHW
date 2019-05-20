@@ -1,0 +1,35 @@
+
+#main {
+    display: flex;
+    margin: 0 auto;
+    flex-direction: column;
+    align-items: center;
+}
+
+#clock-container {
+    display: flex;
+    border: 1px solid black;
+    width: 40%;
+    flex-direction: column;
+}
+
+#clock-header {
+    width: 40%;
+    font-size: 40px;
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.time-container, .date-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    font-size: 40px;
+    box-sizing: border-box;
+    background-color: lightblue;
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+h1, h2, h3 {
+    margin: 0;
+}
+
