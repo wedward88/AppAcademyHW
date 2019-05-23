@@ -18,16 +18,21 @@ class GiphySearch extends React.Component {
 
     handleSubmit (e) {
         e.preventDefault();
-        fetchSearchGiphys(this.props.fetchSearchGiphys(this.state.searchTerm))
+        this.props.fetchSearchGiphys(this.state.searchTerm)
     }
 
     render() {
+        const giphyArr = this.props.store.getState().giphys;
+        
         return (
-        <form onSubmit={this.handleSubmit}>
-            <label htmlFor="inputText"></label>
-            <input onChange={this.handleChange()} type="text" id="inputText" value={this.state.searchTerm} />
-            <input type="submit" value="Search Giphy"/>
-        </form>
+            <div className="giphAndForm">
+                <form onSubmit={this.handleSubmit}>
+                    <label htmlFor="inputText"></label>
+                    <input onChange={this.handleChange()} type="text" id="inputText" value={this.state.searchTerm} />
+                    <input type="submit" value="Search Giphy"/>
+                </form>
+                <GiphysIndex giphyArr={giphyArr} />
+            </div>
         );
     }
 }
